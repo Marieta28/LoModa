@@ -2,8 +2,11 @@ const headerCityButton = document.querySelector(".header__city-button");
 console.log(headerCityButton);
 let hash = location.hash.substring(1); 
 
+headerCityButton.textContent = localStorage.getItem('lomoda-location') || 'Ваш Город?'
+
+
 const updateLocation = () => {
-  const lsLocation = localStorage.getItem('lomoda-location');
+const lsLocation = localStorage.getItem('lomoda-location');
 
   headerCityButton.textContent = localStorage.getItem('lomoda-location') || 'Ваш Город?' ;
 }
@@ -11,8 +14,9 @@ const updateLocation = () => {
 
 headerCityButton.addEventListener('click', () => { 
   const city = prompt('Укажите ваш город!').trim();
+   headerCityButton.textContent = city;
  if (city !== null){
-     localStorage.setItem('lomoda-location', city)
+     localStorage.setItem('lomoda-location', city);
  }
   updateLocation()
 });
