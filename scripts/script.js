@@ -5,6 +5,7 @@ const getLocalStorage = () => JSON?.parse(localStorage.getItem('cart-lomoda')) |
 const setLocalStorage = data => localStorage.setItem('cart-lomoda', JSON.stringify(data));
 const subheaderCart = document.querySelector(".subheader__cart");
 const cartOverlay = document.querySelector(".cart-overlay");
+const cardGoodBuy = document.querySelector('.card-good__buy');
 
 let hash = location.hash.substring(1); 
 
@@ -42,14 +43,15 @@ const renderCard = () => {
 
   });
 
-    cartTotalCost.textContent = totalPrice = ' ₽';
+    cartTotalCost.textContent = totalPrice + ' ₽';
 };
 
 const deleteItemCart = id => {
   const cartItem = getLocalStorage();
   const newCartItems = cartItem.filter(item => item.id !== id);
   setLocalStorage(newCartItems);
-};
+}; 
+
 
 const disableScroll = () => {
 
@@ -128,8 +130,10 @@ cartListGoods.addEventListener('click', (e) => {
   if(e.target.matches('.btn-delete')){
     deleteItemCart(e.target.dataset.id);
     renderCard();
+    cardGoodBuy.classList.remove('delete');
+    cardGoodBuy.textContent = 'Добавить в корзину';
   }
-})
+}) //aaaaaa
 
 subheaderCart.addEventListener('click', cartModalOpen);
 
@@ -221,7 +225,7 @@ try{
   const cardGoodColorList = document.querySelector('.card-good__color-list');
   const cardGoodSizes = document.querySelector('.card-good__sizes');
   const cardGoodSizesList = document.querySelector('.card-good__sizes-list');
-  const cardGoodBuy = document.querySelector('.card-good__buy');
+
   
 
   const generateList  = data => data.reduce((html, item, i) => html + 
